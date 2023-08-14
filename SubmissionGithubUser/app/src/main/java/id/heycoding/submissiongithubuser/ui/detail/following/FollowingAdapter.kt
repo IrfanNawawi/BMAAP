@@ -1,0 +1,39 @@
+package id.heycoding.submissiongithubuser.ui.detail.following
+
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import id.heycoding.submissiongithubuser.data.response.User
+import id.heycoding.submissiongithubuser.databinding.ItemRowUserBinding
+
+class FollowingAdapter(private val listFollowingUser: List<User>) :
+    RecyclerView.Adapter<FollowingAdapter.ViewHolder>() {
+
+    inner class ViewHolder(val binding: ItemRowUserBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(user: User) {
+
+            binding.apply {
+                Glide.with(itemView.context).load(user.avatarUrl).into(binding.imgUserPhoto)
+                binding.tvUserName.text = user.login
+            }
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder(
+            ItemRowUserBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(listFollowingUser[position])
+    }
+
+    override fun getItemCount(): Int = listFollowingUser.size
+}
