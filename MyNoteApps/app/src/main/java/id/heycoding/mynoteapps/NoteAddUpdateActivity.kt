@@ -71,6 +71,8 @@ class NoteAddUpdateActivity : AppCompatActivity(), View.OnClickListener {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.btnSubmit.text = btnTitle
+
+        binding.btnSubmit.setOnClickListener(this)
     }
 
     override fun onClick(v: View) {
