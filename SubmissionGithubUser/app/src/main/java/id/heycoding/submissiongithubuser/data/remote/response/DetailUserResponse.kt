@@ -1,4 +1,4 @@
-package id.heycoding.submissiongithubuser.data.response
+package id.heycoding.submissiongithubuser.data.remote.response
 
 
 import com.google.gson.annotations.SerializedName

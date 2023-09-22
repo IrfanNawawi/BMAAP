@@ -1,6 +1,5 @@
 package id.heycoding.submissiongithubuser.ui.detail.followers
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,15 +7,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import id.heycoding.submissiongithubuser.data.response.User
+import id.heycoding.submissiongithubuser.data.remote.response.User
 import id.heycoding.submissiongithubuser.databinding.FragmentFollowersBinding
-import id.heycoding.submissiongithubuser.util.const.ARG_SECTION_USERNAME
+import id.heycoding.submissiongithubuser.util.Const.ARG_SECTION_USERLOGIN
 
 class FollowersFragment : Fragment() {
 
+    private val followersViewModel: FollowersViewModel by viewModels()
+
     private var _fragmentFollowersBinding: FragmentFollowersBinding? = null
     private val fragmentFollowersBinding get() = _fragmentFollowersBinding!!
-    private val followersViewModel: FollowersViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,31 +28,22 @@ class FollowersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setupObserve()
     }
 
+    /**
+     * Function to set observe live data.
+     */
     private fun setupObserve() {
-        followersViewModel.followersUser.observe(viewLifecycleOwner) { Followers ->
-            setFollowersData(Followers)
-        }
-
-        followersViewModel.isLoading.observe(viewLifecycleOwner) { loading ->
-            setLoadingData(loading)
-        }
-
-        followersViewModel.getFollowersUser(arguments?.getString(ARG_SECTION_USERNAME).toString())
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    private fun setFollowersData(userData: List<User>) {
-        with(fragmentFollowersBinding) {
+        followersViewModel.followersUser.observe(viewLifecycleOwner) { followers ->
             val listUserData = ArrayList<User>()
-            for (user in userData) {
+            for (user in followers) {
                 listUserData.clear()
-                listUserData.addAll(userData)
+                listUserData.addAll(followers)
             }
 
-            with(rvFollowers) {
+            with(fragmentFollowersBinding.rvFollowers) {
                 layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
                 val followersAdapter = FollowersAdapter(listUserData)
@@ -60,8 +51,17 @@ class FollowersFragment : Fragment() {
                 adapter = followersAdapter
             }
         }
+
+        followersViewModel.isLoading.observe(viewLifecycleOwner) { loading ->
+            setLoadingData(loading)
+        }
+
+        followersViewModel.getFollowersUser(arguments?.getString(ARG_SECTION_USERLOGIN).toString())
     }
 
+    /**
+     * Function to set loading data.
+     */
     private fun setLoadingData(loading: Boolean) {
         fragmentFollowersBinding.apply {
             if (loading) {
@@ -72,6 +72,9 @@ class FollowersFragment : Fragment() {
         }
     }
 
+    /**
+     * Function to destroy fragment.
+     */
     override fun onDestroy() {
         super.onDestroy()
         _fragmentFollowersBinding = null

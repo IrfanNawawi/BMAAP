@@ -1,4 +1,4 @@
-package id.heycoding.submissiongithubuser.data.response
+package id.heycoding.submissiongithubuser.data.remote.response
 
 
 import com.google.gson.annotations.SerializedName
@@ -21,6 +21,10 @@ data class User(
     val followersUrl: String,
     @SerializedName("following_url")
     val followingUrl: String,
+    @SerializedName("followers")
+    val followers: Int,
+    @SerializedName("following")
+    val following: Int,
     @SerializedName("gists_url")
     val gistsUrl: String,
     @SerializedName("gravatar_id")

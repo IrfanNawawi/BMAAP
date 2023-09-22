@@ -7,4 +7,6 @@
     <string name="txt_search_user">Cari User Github</string>
     <string name="txt_detail_bio">No Bio</string>
     <string name="txt_detail_location">No Location</string>
+    <string name="txt_menu_favorite">Favorite</string>
+    <string name="txt_menu_darkmode">Dark Mode</string>
 </resources>

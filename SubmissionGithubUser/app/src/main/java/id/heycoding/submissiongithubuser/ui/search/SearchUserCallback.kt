@@ -1,7 +1,7 @@
 package id.heycoding.submissiongithubuser.ui.search
 
-import id.heycoding.submissiongithubuser.data.response.User
+import id.heycoding.submissiongithubuser.data.remote.response.User
 
 interface SearchUserCallback {
-    fun setDetailUser(user: User)
+    fun setIntentDetailUser(user: User)
 }

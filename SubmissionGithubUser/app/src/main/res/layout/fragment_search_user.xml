@@ -9,9 +9,9 @@
     <com.google.android.material.search.SearchBar
         android:id="@+id/searchbar_user"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         android:hint="@string/txt_search_user"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:menu="@menu/searchbar_menu"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

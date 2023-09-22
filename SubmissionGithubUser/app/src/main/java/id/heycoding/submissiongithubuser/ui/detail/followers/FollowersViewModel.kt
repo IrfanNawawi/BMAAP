@@ -4,8 +4,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import id.heycoding.submissiongithubuser.data.remote.ApiConfig
-import id.heycoding.submissiongithubuser.data.response.User
+import id.heycoding.submissiongithubuser.data.remote.response.User
+import id.heycoding.submissiongithubuser.data.remote.service.ApiConfig
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -22,6 +22,9 @@ class FollowersViewModel : ViewModel() {
         private const val TAG = "FollowersViewModel"
     }
 
+    /**
+     * Function to get data followers.
+     */
     fun getFollowersUser(username: String) {
         _isLoading.value = true
         val client = ApiConfig.getApiServices().getFollowersUser(username)
